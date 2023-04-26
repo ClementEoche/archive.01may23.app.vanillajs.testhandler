@@ -2,32 +2,33 @@ import Room from '../models/room.js';
 
 export default class RoomList {
   constructor() {
-    this.rooms = [];
+    this.roomsKey = 'rooms';
+
+    if (!sessionStorage.getItem(this.roomsKey)) {
+      sessionStorage.setItem(this.roomsKey, JSON.stringify([]));
+    }
   }
 
   addRoom(roomName) {
-    // Vérifier si un salon avec le même nom existe déjà
-    const existingRoom = this.rooms.find((room) => room.name === roomName);
-
-    if (existingRoom) {
-      return null;
-    }
-
-    const roomId = this.rooms.length;
+    const rooms = this.getAllRooms();
+    const roomId = rooms.length;
     const newRoom = new Room(roomName, roomId);
-    this.rooms.push(newRoom);
+    rooms.push(newRoom);
+    sessionStorage.setItem(this.roomsKey, JSON.stringify(rooms));
     return newRoom;
   }
 
   getRoomById(id) {
-    return this.rooms.find((room) => room.id === id);
+    const rooms = this.getAllRooms();
+    return rooms.find((room) => room.id === id);
   }
 
-  getRoomByName(name) {
-    return this.rooms.find((room) => room.name === name);
+  getRoomByName(roomName) {
+    const rooms = this.getAllRooms();
+    return rooms.find((room) => room.name === roomName);
   }
 
   getAllRooms() {
-    return this.rooms;
+    return JSON.parse(sessionStorage.getItem(this.roomsKey));
   }
 }

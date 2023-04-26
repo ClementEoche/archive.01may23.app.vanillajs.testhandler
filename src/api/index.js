@@ -49,7 +49,7 @@ export function createRoom(room_name) {
 export function postMessage(user_id, room_id, content) {
   return apiRequest("/post-message", "POST", { user_id, room_id, content });
 }
-/*
+
 export function disconnect() {
   return apiRequest("/disconnect");
-}*/
+}

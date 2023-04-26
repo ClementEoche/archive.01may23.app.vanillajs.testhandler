@@ -1,70 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message Board</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Board</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-    #app {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      height: 100vh;
-    }
+      #app {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        height: 100vh;
+      }
 
-    #sidebar {
-      background-color: #f0f0f0;
-      padding: 1rem;
-      border-right: 1px solid #ccc;
-    }
+      #sidebar {
+        background-color: #f0f0f0;
+        padding: 1rem;
+        border-right: 1px solid #ccc;
+      }
 
-    #chat {
-      padding: 1rem;
-    }
+      #chat {
+        padding: 1rem;
+      }
 
-    .room-list,
-    .user-list {
-      list-style-type: none;
-      padding: 0;
-    }
+      .room-list,
+      .user-list {
+        list-style-type: none;
+        padding: 0;
+      }
 
-    h2 {
-      margin-top: 0;
-    }
+      h2 {
+        margin-top: 0;
+      }
 
-    #message-input {
-      width: 100%;
-      box-sizing: border-box;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <div id="sidebar">
-      <h2>Salons</h2>
-      <ul class="room-list">
-        <!-- Les salons seront ajoutés ici -->
-      </ul>
-      <h2>Utilisateurs</h2>
-      <ul class="user-list">
-        <!-- Les utilisateurs seront ajoutés ici -->
-      </ul>
-    </div>
-    <div id="chat">
-      <div id="messages">
-        <!-- Les messages seront ajoutés ici -->
+      #message-input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="sidebar">
+        <h1>Message Board</h1>
+        <button id="disconnect">Disconnect</button>
+        <h2>Profil</h2>
+        <ul class="user-info">
+            <!-- Les informations utilisateurs seront ajoutées ici -->
+        </ul>
+        <h2>Salons</h2>
+        <ul class="room-list">
+          <!-- Les salons seront ajoutés ici -->
+        </ul>
+        <h2>Utilisateurs</h2>
+        <ul class="user-list">
+          <!-- Les utilisateurs seront ajoutés ici -->
+        </ul>
       </div>
-      <div id="message-form">
-        <input type="text" id="message-input" placeholder="Tapez votre message...">
-        <button id="send-button">Envoyer</button>
+      <div id="chat">
+        <div id="messages">
+          <!-- Les messages seront ajoutés ici -->
+        </div>
+        <div id="message-form">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Tapez votre message..."
+          />
+          <button id="send-button">Envoyer</button>
+        </div>
       </div>
     </div>
-  </div>
-  <script type="module" src="src/main.js"></script>
-</body>
+    <script type="module" src="src/main.js"></script>
+  </body>
 </html>

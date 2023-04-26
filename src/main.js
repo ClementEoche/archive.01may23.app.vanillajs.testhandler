@@ -6,6 +6,7 @@ import {
   isValidMessageContent,
 } from "./utils/utils.js";
 
+
 (async function main() {
   const chat = new Chat();
 
@@ -14,25 +15,42 @@ import {
   if (isValidUsername(username)) {
     const user = chat.createUser(username);
     const response = await api.createUser(username);
-    if (response) {
-      addUserToUserList(user);
+    if (
+      response.data === "Username already exists" &&
+      response.success === false
+    ) {
+      sessionStorage.setItem("currentuser", JSON.stringify(user));
     }
+    if (response.success === true) {
+      addUserToUserList(user);
+      sessionStorage.setItem("currentuser", JSON.stringify(user));
+    }
+    refreshUserInfo();
   } else {
-    console.error("Nom d'utilisateur invalide");
+    alert("Nom d'utilisateur invalide");
+    window.location.reload();
     return;
   }
-
   // Création d'un salon
   const roomName = prompt("Entrez le nom du salon à créer:");
   if (isValidRoomName(roomName)) {
     const room = chat.createRoom(roomName);
     const response = await api.createRoom(roomName);
-    if (response) {
+    if (response.success === true) {
       addRoomToRoomList(room);
+      sessionStorage.setItem("currentroom", JSON.stringify(room));
+      this.currentRoomId = room.id;
+    }
+    if (
+      response.data === "A room with the same name already exists." &&
+      response.success === false
+    ) {
+      sessionStorage.setItem("currentroom", JSON.stringify(room));
+      this.currentRoomId = room.id;
     }
   } else {
-    console.error("Nom de salon invalide");
-    return;
+    alert("Nom de salon invalide");
+    window.location.reload();
   }
 
   // Récupération et affichage des salons et des utilisateurs
@@ -46,6 +64,7 @@ import {
   const userId = 0;
   const roomId = 0;
   const sendButton = document.getElementById("send-button");
+  const disconnect = document.getElementById("disconnect");
   const messageInput = document.getElementById("message-input");
 
   sendButton.addEventListener("click", async () => {
@@ -53,7 +72,7 @@ import {
     if (isValidMessageContent(content)) {
       const message = chat.postMessage(userId, roomId, content);
       await api.postMessage(userId, roomId, content);
-      addMessageToMessages(message);
+      refreshMessages();
       messageInput.value = "";
     } else {
       console.error("Contenu de message invalide");
@@ -61,12 +80,16 @@ import {
     }
   });
 
-  const messages = await api.getMessagesByRoomId(roomId);
-  messages.forEach((message) => addMessageToMessages(message));
+  disconnect.addEventListener("click", async () => {
+    const response = await api.disconnect();
+    if (response.success === true) {
+      sessionStorage.clear();
+      window.location.reload();
+    }
+  });
 
-  // Déconnexion de l'utilisateur
-  //await api.disconnect();
-  //console.log('Utilisateur déconnecté');
+  const messages = await api.getMessagesByRoomId(roomId);
+  messages.data.forEach((message) => addMessageToMessages(message));
 })();
 
 function addRoomToRoomList(room) {
@@ -76,6 +99,13 @@ function addRoomToRoomList(room) {
   roomList.appendChild(roomItem);
 }
 
+function refreshUserInfo() {
+  const userInfos = document.querySelector(".user-info");
+  const userInfosItem = document.createElement("li");
+  userInfosItem.innerHTML = sessionStorage.getItem("currentuser").username;
+  userInfos.appendChild(userInfosItem);
+}
+
 function addUserToUserList(user) {
   const userList = document.querySelector(".user-list");
   const userItem = document.createElement("li");
@@ -83,9 +113,9 @@ function addUserToUserList(user) {
   userList.appendChild(userItem);
 }
 
-function addMessageToMessages(message) {
+function refreshMessages() {
   const messagesDiv = document.getElementById("messages");
-  const messageItem = document.createElement("div");
-  messageItem.textContent = `${message.user_id}: ${message.content}`;
-  messagesDiv.appendChild(messageItem);
+  messagesDiv.innerHTML = "";
+  const messages = chat.getMessagesByRoomId(currentRoomId);
+  messages.data.forEach((message) => addMessageToMessages(message));
 }

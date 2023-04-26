@@ -2,25 +2,33 @@ import User from '../models/user.js';
 
 export default class UserList {
   constructor() {
-    this.users = [];
+    this.usersKey = 'users';
+
+    if (!sessionStorage.getItem(this.usersKey)) {
+      sessionStorage.setItem(this.usersKey, JSON.stringify([]));
+    }
   }
 
   addUser(username) {
-    const userId = this.users.length;
+    const users = this.getAllUsers();
+    const userId = users.length;
     const newUser = new User(username, userId);
-    this.users.push(newUser);
+    users.push(newUser);
+    sessionStorage.setItem(this.usersKey, JSON.stringify(users));
     return newUser;
   }
 
   getUserById(id) {
-    return this.users.find((user) => user.id === id);
+    const users = this.getAllUsers();
+    return users.find((user) => user.id === id);
   }
 
   getUserByUsername(username) {
-    return this.users.find((user) => user.username === username);
+    const users = this.getAllUsers();
+    return users.find((user) => user.username === username);
   }
 
   getAllUsers() {
-    return this.users;
+    return JSON.parse(sessionStorage.getItem(this.usersKey));
   }
 }

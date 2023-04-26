@@ -1,6 +1,7 @@
-import UserList from './user-list.js';
-import RoomList from './room-list.js';
-import Message from '../models/message.js';
+import UserList from "./user-list.js";
+import RoomList from "./room-list.js";
+import Message from "../models/message.js";
+import * as api from "../api/index.js";
 
 export default class Chat {
   constructor() {
@@ -28,7 +29,7 @@ export default class Chat {
     return this.roomList.getAllRooms();
   }
 
-  postMessage(user_id, room_id, content) {
+  async postMessage(user_id, room_id, content) {
     const user = this.getUserById(user_id);
     const room = this.getRoomById(room_id);
 
@@ -36,30 +37,25 @@ export default class Chat {
       return null;
     }
 
-    if (!user.canPostMessage()) {
-      return null;
-    }
-
-    const messageId = room.messages.length;
+    const roomMessagesKey = `messages_${room_id}`;
+    const roomMessages =
+      JSON.parse(sessionStorage.getItem(roomMessagesKey)) || [];
+    const messageId = roomMessages.length;
     const message = new Message(user_id, room_id, content, messageId);
-    
+
     if (!message.isValid()) {
       return null;
     }
-
-    room.messages.push(message);
-    user.postMessage();
-
-    return message;
+    const response = await api.postMessage(user_id, room_id, content);
+    if (response) {
+      roomMessages.push(message);
+      sessionStorage.setItem(roomMessagesKey, JSON.stringify(roomMessages));
+      return message;
+    }
   }
 
   getMessagesByRoomId(room_id) {
-    const room = this.getRoomById(room_id);
-
-    if (!room) {
-      return null;
-    }
-
-    return room.messages;
+    const roomMessagesKey = `messages_${room_id}`;
+    return JSON.parse(sessionStorage.getItem(roomMessagesKey)) || [];
   }
 }
