@@ -24,8 +24,8 @@ Pour configurer l'application frontend, suivez ces étapes:
 1. Clonez le dépôt sur votre machine locale :
 
 ```sh
-git clone https://github.com/votre-identifiant/tableau-de-messages-frontend.git
-cd tableau-de-messages-frontend
+git clone https://github.com/ceocheschool/tested-vanilla-js-app
+cd tested-vanilla-js-app
 ```
 
 2. Installez `http-server` globalement à l'aide de `npm` :
