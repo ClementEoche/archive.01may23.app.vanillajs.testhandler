@@ -1,4 +1,4 @@
-# Frontend du Tableau de Messages
+# Message Board App
 
 Ceci est l'application frontend du Tableau de Messages, une application de chat en temps réel simple qui permet aux utilisateurs de rejoindre des salons de discussion et d'échanger des messages avec d'autres utilisateurs. L'application est construite en utilisant HTML, CSS et JavaScript.
 
@@ -28,19 +28,25 @@ git clone https://github.com/ceocheschool/tested-vanilla-js-app
 cd tested-vanilla-js-app
 ```
 
-2. Installez `http-server` globalement à l'aide de `npm` :
+2. Installez les dépendances du projet pour les tests à l'aide de `npm` :
+
+```sh
+npm i
+```
+
+3. Installez `http-server` globalement à l'aide de `npm` :
 
 ```sh
 npm install -g http-server
 ```
 
-3. Démarrez le serveur de développement en exécutant la commande suivante à la racine du projet :
+4. Démarrez le serveur de développement en exécutant la commande suivante à la racine du projet :
 
 ```sh
 http-server
 ```
 
-4. Ouvrez l'URL indiquée dans la console (généralement `http://127.0.0.1:8080`) dans votre navigateur préféré.
+5. Ouvrez l'URL indiquée dans la console (généralement `http://127.0.0.1:8080`) dans votre navigateur préféré.
 
 ## Utilisation
 
@@ -50,7 +56,3 @@ http-server
 4. Tapez votre message dans le champ de saisie et cliquez sur le bouton "Envoyer le message" ou appuyez sur Entrée pour envoyer votre message.
 5. Visualisez les messages des autres utilisateurs en temps réel.
 6. Cliquez sur le bouton "Déconnexion" pour effacer toutes les données de session et revenir à l'écran de création d'utilisateur.
-
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus d'informations.
