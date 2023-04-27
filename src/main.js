@@ -82,6 +82,7 @@ import {
     const content = messageInput.value;
     if (isValidMessageContent(content)) {
       const response = await api.postMessage(userId, roomId, content);
+      console.log(response);
       if (response.success === true) {
         await refreshMessages();
       } else {
