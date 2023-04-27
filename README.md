@@ -50,9 +50,7 @@ http-server
 
 ## Utilisation
 
-1. Pour commencer à utiliser le Tableau de Messages, créez un nouvel utilisateur en entrant un nom d'utilisateur et en cliquant sur le bouton "Créer un utilisateur".
-2. Créez un nouveau salon en entrant un nom de salon et en cliquant sur le bouton "Créer un salon".
-3. Sélectionnez un salon existant dans la liste pour le rejoindre.
-4. Tapez votre message dans le champ de saisie et cliquez sur le bouton "Envoyer le message" ou appuyez sur Entrée pour envoyer votre message.
-5. Visualisez les messages des autres utilisateurs en temps réel.
-6. Cliquez sur le bouton "Déconnexion" pour effacer toutes les données de session et revenir à l'écran de création d'utilisateur.
+1. Pour commencer à utiliser Message Board renseignez votre nom d'utilisateur dans le champ de saisie et le nom du salon.
+2. Tapez votre message dans le champ de saisie et cliquez sur le bouton "Envoyer le message" ou appuyez sur Entrée pour envoyer votre message.
+3. Visualisez les messages des autres utilisateurs en temps réel.
+4. Cliquez sur le bouton "Snap Fingers like Thanos" pour effacer toutes les données de session et revenir à l'écran de création d'utilisateur.
