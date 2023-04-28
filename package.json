@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "description": "A simple message board application using Vanilla JavaScript and a custom backend API.",
     "main": "src/main.js",
+    "type": "module",
     "scripts": {
         "dev": "node main.js",
-        "test": "jest"
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
     },
     "repository": {
         "type": "git",
@@ -19,12 +20,23 @@
     "author": "Your Name <your.email@example.com>",
     "license": "MIT",
     "devDependencies": {
-        "jest": "^27.4.5"
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "babel-jest": "^29.5.0",
+        "jest": "^27.4.5",
+        "node-fetch": "^3.3.1"
     },
     "jest": {
-        "testEnvironment": "jsdom"
+        "testEnvironment": "jsdom",
+        "transform": {
+            "^.+\\.jsx?$": "babel-jest"
+        },
+        "moduleNameMapper": {
+            "axios": "axios/dist/node/axios.cjs"
+        }
     },
     "dependencies": {
+        "axios": "^1.4.0",
         "http-server": "^14.1.1"
     }
 }

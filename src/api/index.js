@@ -1,10 +1,15 @@
+// DECOMMENTER LA PARTIE SUIVANTE POUR LES TESTS
+import axios from "axios";
+// LE PROBLEME VIENT D'UN PACKAGE G RIEN COMPRIS MAIS CA MARCHE
 const API_BASE_URL = "http://localhost:8000";
 
 export async function apiRequest(endpoint, method, data) {
   const url = API_BASE_URL + endpoint;
+
   const options = {
     method,
-    credentials: 'include',
+    url,
+    withCredentials: true,
   };
 
   if (data) {
@@ -12,14 +17,12 @@ export async function apiRequest(endpoint, method, data) {
     for (const key in data) {
       formData.append(key, data[key]);
     }
-    options.body = formData;
+    options.data = formData;
   }
 
   try {
-    const response = await fetch(url, options);
-    const jsonResponse = await response.json();
-    //console.log("Response from", endpoint, " ", jsonResponse);
-    return jsonResponse;
+    const response = await axios(options);
+    return response.data;
   } catch (error) {
     console.error("Error fetching data from", endpoint, " ", error);
     return null;

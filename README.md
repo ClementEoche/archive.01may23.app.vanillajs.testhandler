@@ -48,6 +48,24 @@ http-server
 
 5. Ouvrez l'URL indiquée dans la console (généralement `http://127.0.0.1:8080`) dans votre navigateur préféré.
 
+## Tests
+
+Pour exécuter les tests, suivez ces étapes :
+
+1. Decommentez l'import axios dans le fichier `src/api/index.js` :
+
+```js
+// import axios from 'axios';
+```
+
+2. Exécutez la commande suivante à la racine du projet :
+
+```sh
+npm test
+```
+
+Assurez-vous que le serveur de développement est en cours d'exécution avant d'exécuter les tests.
+
 ## Utilisation
 
 1. Pour commencer à utiliser Message Board renseignez votre nom d'utilisateur dans le champ de saisie et le nom du salon.
