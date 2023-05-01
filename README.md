@@ -46,7 +46,7 @@ npm install -g http-server
 http-server
 ```
 
-5. Ouvrez l'URL indiquée dans la console (généralement `http://127.0.0.1:8080`) dans votre navigateur préféré.
+5. Ouvrez l'URL indiquée dans la console (`http://localhost:8080`) dans votre navigateur préféré.
 
 ## Tests
 
